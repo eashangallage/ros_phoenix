@@ -413,7 +413,7 @@
 
     <!-- FRONT LEFT WHEEL LINK -->
 
-    <joint name="left_wheel_joint" type="continuous">
+    <joint name="right_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel"/>
         <origin xyz="${front_wheel_offset_x} -${wheel_offset_y} 0" rpy="-${pi/2} 0 0" />
@@ -446,7 +446,7 @@
 
     <!-- FRONT RIGHT WHEEL LINK -->
 
-    <joint name="right_wheel_joint" type="continuous">
+    <joint name="left_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel"/>
         <origin xyz="${front_wheel_offset_x} ${wheel_offset_y} 0" rpy="${pi/2} 0 0" />

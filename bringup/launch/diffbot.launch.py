@@ -20,13 +20,20 @@ from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument
 
+from ament_index_python.packages import get_package_share_directory
+
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
+
+import os
 
 
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 def generate_launch_description():
+
+    package_name='ros_phoenix'
+
     # """Generate launch description with multiple components."""
     # Conditionally include the container based on the value of the use_container argument
     use_container_arg = DeclareLaunchArgument(
@@ -157,6 +164,24 @@ def generate_launch_description():
         )
     )
 
+    config_ekf = os.path.join(get_package_share_directory(package_name), 'config', 'localization.yaml')
+
+    start_robot_localization_cmd = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        output='screen',
+        parameters=[config_ekf,  {'use_sim_time': False}],
+    )
+
+    imu_config = os.path.join(get_package_share_directory(package_name),'config','imu.yaml')
+
+    robot_imu = Node(
+        package="bno055",
+        executable="bno055",
+        parameters=[imu_config],
+    )
+
     nodes = [
         use_rviz_arg,
         use_container_arg,
@@ -166,6 +191,8 @@ def generate_launch_description():
         delay_rviz_after_joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
         container,
+        start_robot_localization_cmd,
+        robot_imu
 
     ]
 
