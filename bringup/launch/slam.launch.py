@@ -40,8 +40,7 @@ def generate_launch_description():
         'use_container',
         default_value='True',
         description='Whether to launch the Phoenix container or not'
-    )+
-    
+    )
     container = ComposableNodeContainer(
         name="PhoenixContainer",
         namespace="",
@@ -132,7 +131,7 @@ def generate_launch_description():
         executable="rviz2",
         name="rviz2",
         output="log",
-        parameters=[{"use_rviz": False}],
+        parameters=[{"use_rviz": True}],
         condition=IfCondition(LaunchConfiguration('use_rviz')),
         arguments=["-d", rviz_config_file],
     )
@@ -165,23 +164,23 @@ def generate_launch_description():
         )
     )
 
-    # config_ekf = os.path.join(get_package_share_directory(package_name), 'config', 'localization.yaml')
+    config_ekf = os.path.join(get_package_share_directory(package_name), 'config', 'localization.yaml')
 
-    # start_robot_localization_cmd = Node(
-    #     package='robot_localization',
-    #     executable='ekf_node',
-    #     name='ekf_filter_node',
-    #     output='screen',
-    #     parameters=[config_ekf,  {'use_sim_time': False}],
-    # )
+    start_robot_localization_cmd = Node(
+        package='robot_localization',
+        executable='ekf_node',
+        name='ekf_filter_node',
+        output='screen',
+        parameters=[config_ekf,  {'use_sim_time': False}],
+    )
 
-    # imu_config = os.path.join(get_package_share_directory(package_name),'config','imu.yaml')
+    imu_config = os.path.join(get_package_share_directory(package_name),'config','imu.yaml')
 
-    # robot_imu = Node(
-    #     package="bno055",
-    #     executable="bno055",
-    #     parameters=[imu_config],
-    # )
+    robot_imu = Node(
+        package="bno055",
+        executable="bno055",
+        parameters=[imu_config],
+    )
 
     nodes = [
         use_rviz_arg,
@@ -191,9 +190,9 @@ def generate_launch_description():
         joint_state_broadcaster_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
         delay_robot_controller_spawner_after_joint_state_broadcaster_spawner,
-        container
-        # start_robot_localization_cmd,
-        # robot_imu
+        container,
+        start_robot_localization_cmd,
+        robot_imu
 
     ]
 
