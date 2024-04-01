@@ -20,7 +20,7 @@ $ cd <ros_ws>
 $ source install/setup.bash
 $ ros2 launch ros_phoenix diffbot.launch.py
 ```
-## With RVIZ
+#### With RVIZ
 ```
 $ ros2 launch ros_phoenix diffbot.launch.py use_rviz:=true
 ```
@@ -30,7 +30,7 @@ $ cd <ros_ws>
 $ source install/setup.bash
 $ ros2 launch ros_phoenix launch_sim.launch.py
 ```
-### With RVIZ
+#### With RVIZ
 ```
 $ ros2 launch ros_phoenix launch_sim.launch.py use_rviz:=true
 ```
