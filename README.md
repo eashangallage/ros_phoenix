@@ -13,18 +13,16 @@ $ cd <ros_ws>
 $ colcon build --symlink-install --packages-select ros_phoenix
 $ source install/setup.bash
 ```
-### With RVIZ
-```
-$ cd <ros_ws>
-$ source install/setup.bash
-$ ros2 launch ros_phoenix diffbot.launch.py use_rviz:=true
-```
 
 ## Launch in Physical Rover
 ```
 $ cd <ros_ws>
 $ source install/setup.bash
 $ ros2 launch ros_phoenix diffbot.launch.py
+```
+## With RVIZ
+```
+$ ros2 launch ros_phoenix diffbot.launch.py use_rviz:=true
 ```
 ## Launch in Simulation
 ```
@@ -34,7 +32,5 @@ $ ros2 launch ros_phoenix launch_sim.launch.py
 ```
 ### With RVIZ
 ```
-$ cd <ros_ws>
-$ source install/setup.bash
 $ ros2 launch ros_phoenix launch_sim.launch.py use_rviz:=true
 ```
