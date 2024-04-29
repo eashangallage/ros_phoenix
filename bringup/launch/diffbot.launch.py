@@ -48,10 +48,10 @@ def generate_launch_description():
                 plugin="ros_phoenix::TalonSRX",
                 name="left_wheel_joint",
                 parameters=[{"id": 1}, 
-                            {"P": 0.95}, 
-                            {"I": 0.0}, 
-                            {"D":0.0},
-                            {"sensor_multiplier":1.0},
+                            {"P": 500.0}, 
+                            {"I": 1.0}, 
+                            {"D":1.0},
+                            {"sensor_multiplier":0.5},
                             {"edges_per_rot":4096}],
             ),
             ComposableNode(
@@ -59,10 +59,10 @@ def generate_launch_description():
                 plugin="ros_phoenix::TalonSRX",
                 name="right_wheel_joint",
                 parameters=[{"id": 3},
-                            {"P": 1.2}, 
-                            {"I": 0.0}, 
-                            {"D":0.0},
-                            {"sensor_multiplier":-1.0},
+                            {"P": 5.0}, 
+                            {"I": 1.0}, 
+                            {"D":1.0},
+                            {"sensor_multiplier":-0.6},
                             {"edges_per_rot":4096}],
             ),
         ],
@@ -122,7 +122,7 @@ def generate_launch_description():
 
     # Conditionally include the container based on the value of the use_rviz argument
     rviz_config_file = PathJoinSubstitution(
-        [FindPackageShare("ros_phoenix"), "rviz", "gz_simulation.rviz"]
+        [FindPackageShare("ros_phoenix"), "rviz", "nav2_slam_config.rviz"]
     )
     use_rviz_arg =DeclareLaunchArgument(
         'use_rviz',

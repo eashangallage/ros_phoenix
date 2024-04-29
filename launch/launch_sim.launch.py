@@ -68,6 +68,12 @@ def generate_launch_description():
             'R': LaunchConfiguration('roll', default='0.00'),
             'P': LaunchConfiguration('pitch', default='0.00'),
             'Y': LaunchConfiguration('yaw', default='0.00')}
+            
+    # world = os.path.join(
+    #     get_package_share_directory('ros_pheonix'),
+    #     'world',
+    #     'random.world'
+    # )
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -75,12 +81,12 @@ def generate_launch_description():
                     launch_arguments={'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_file}.items()
              )
     
+    
     # Run the spawner node from the gazebo_ros package. The entity name doesn't really matter if you only have a single robot.
     spawn_entity = Node(package='gazebo_ros', executable='spawn_entity.py',
                         arguments=['-topic', 'robot_description',
                                    '-entity', 'my_bot',
-                                    '-x', pose['x'], '-y', pose['y'], '-z', pose['z'],
-                                    '-R', pose['R'], '-P', pose['P'], '-Y', pose['Y']],
+                                    '-x', '0.0', '-y', '0.0', '-z', '0.3'],
                         output='screen')
 
 

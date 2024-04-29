@@ -36,6 +36,16 @@ ekf_filter_node:
     imu0_queue_size: 10
     imu0_remove_gravitational_acceleration: true
 
+    imu1: /laser_odom
+    imu1_config: [false, false, false,
+                  false, false, false,
+                  true, false, false,
+                  false, false, true,
+                  false, false, false]
+    imu1_differential: true
+    imu1_queue_size: 100
+    imu1_remove_gravitational_acceleration: true
+
     # publish_acceleration: false
     # especially useful in situations where even small amounts of lag in convergence for a given state variable cause problems in your application
     # use_control: false
